@@ -37,10 +37,11 @@ class ArteTVBaseIE(InfoExtractor):
             'id': player_info['VID'],
             'thumbnail': player_info.get('programImage') or player_info.get('VTU', {}).get('IUR')
         }
-
         upload_date_str = player_info.get('shootingDate')
         if not upload_date_str:
             upload_date_str = (player_info.get('VRA') or player_info.get('VDA') or '').split(' ')[0]
+        day, month, year = upload_date_str.split('/')
+        info_dict['release_date'] = '{}-{}-{}'.format(year, month, day)
         info_dict['upload_date'] = unified_strdate(upload_date_str)
 
         # extract alt_title if available
@@ -69,6 +70,8 @@ class ArteTVBaseIE(InfoExtractor):
 
         if arte_episode_title:
             info_dict['episode'] = arte_episode_title
+
+        info_dict['channel'] = 'Arte'
 
         # extract episode number if possible
         episode_number_parse = re.findall(r'\(([0-9]+)\/([0-9]+)\)', title)
