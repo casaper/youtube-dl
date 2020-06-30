@@ -454,12 +454,12 @@ class FFmpegMetadataPP(FFmpegPostProcessor):
         # 3. https://kodi.wiki/view/Video_file_tagging
         # 4. http://atomicparsley.sourceforge.net/mpeg-4files.html
 
-        add('title', ('track', 'title'))
-        add('date', 'upload_date')
+        add('title', ('track', 'fulltitle', 'title'))
+        add('date', ('release_date', 'upload_date'))
         add(('description', 'comment'), 'description')
         add('purl', 'webpage_url')
         add('track', 'track_number')
-        add('artist', ('artist', 'creator', 'uploader', 'uploader_id'))
+        add('artist', ('artist', 'creator', 'channel', 'uploader', 'uploader_id'))
         add('genre')
         add('album')
         add('album_artist')

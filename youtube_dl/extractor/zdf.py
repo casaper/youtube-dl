@@ -177,6 +177,8 @@ class ZDFIE(ZDFBaseIE):
             'thumbnails': thumbnails,
             'subtitles': self._extract_subtitles(ptmd),
             'formats': formats,
+            'channel': content.get('tvService') or 'ZDF',
+            'release_date': content.get('editorialDate').split('T')[0]
         }
 
     def _extract_regular(self, url, player, video_id):
@@ -221,6 +223,7 @@ class ZDFIE(ZDFBaseIE):
             'thumbnails': thumbnails,
             'subtitles': self._extract_subtitles(document),
             'formats': formats,
+            'channel': 'ZDF'
         }
 
     def _real_extract(self, url):
